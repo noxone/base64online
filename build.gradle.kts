@@ -15,6 +15,7 @@ dependencies {
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-html-js", version = "0.7.3")
 
     implementation(npm("js-base64", "> 3.0.0"))
+    implementation(npm("file-saver", "> 2.0.0"))
 }
 
 kotlin {
