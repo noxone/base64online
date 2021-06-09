@@ -1,3 +1,5 @@
+# ignore IntelliJ-Folder
+.idea
 
 # Created by https://www.toptal.com/developers/gitignore/api/kotlin,gradle,visualstudiocode,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=kotlin,gradle,visualstudiocode,intellij
