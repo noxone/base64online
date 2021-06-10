@@ -1,4 +1,4 @@
-# Base64 online services
+# Base64 online services  [![Build Status](https://github.com/noxone/base64online/actions/workflows/test.yml/badge.svg)](https://github.com/noxone/base64online/actions)
 
 The most useful base64 tools put together on one page.
 
