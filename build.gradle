@@ -1,26 +1,26 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.5.10"
+    id 'org.jetbrains.kotlin.js' version '1.5.10'
 }
 
-group = "org.olafneumann"
-version = "1.0-SNAPSHOT"
+group 'org.example'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven(url = "https://jcenter.bintray.com")
 }
 
 dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-html-js", version = "0.7.3")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+    implementation "org.jetbrains.kotlinx:kotlinx-html-js:0.7.3"
+    implementation npm("js-base64", "> 3.0.0")
+    implementation npm("file-saver", "> 2.0.0")
 
-    implementation(npm("js-base64", "> 3.0.0"))
-    implementation(npm("file-saver", "> 2.0.0"))
+    testImplementation "org.jetbrains.kotlin:kotlin-test-js"
 }
 
 kotlin {
     js {
-        useCommonJs()
+        compileKotlinJs.kotlinOptions.moduleKind = "commonjs"
         browser {
             webpackTask {
                 cssSupport.enabled = true
