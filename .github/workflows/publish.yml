@@ -1,15 +1,13 @@
-
-name: Build Projects
+name: Publish
 
 on:
-  - push
-  - pull_request
+  push:
+    branches: [ master ]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
-    name: Build and Test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,15 +26,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Run Gradle tasks
-        run: ./gradlew clean testPackageJson test browserDevelopmentWebpack
+        run: ./gradlew clean browserProductionWebpack
       - name: Cleanup Gradle Cache
           # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
-          # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+
+      # publish the generated page to github pages
+      - name: Deploy Site
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: Package
-          path: build/distributions
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/distributions
+          cname: base64.olafneumann.org
