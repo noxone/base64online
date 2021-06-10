@@ -9,23 +9,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    name: Build with JDK 8
+    name: Build and Test
     steps:
-      - name: Cache Dependencies
-        uses: actions/cache@v2.1.5
-        with:
-          key: maven-dependencies
-          path: ~/.m2/repository
-      - name: Check out
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up JDK 8
+      - name: Setup Java
         uses: actions/setup-java@v2
         with:
-          distribution: adopt
-          java-version: 8
-      - name: Gradle Cache
-        uses: burrunan/gradle-cache-action@v1
+          java-version: '16'
+          distribution: 'adopt'
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
         with:
-          job-id: test
-      - name: "Clean & Package"
-        run: ./gradlew clean test browserProductionWebpack
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Gradle tasks
+        run: ./gradlew clean testPackageJson test browserDevelopmentWebpack
+      - name: Cleanup Gradle Cache
+          # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+          # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: build/distributions
