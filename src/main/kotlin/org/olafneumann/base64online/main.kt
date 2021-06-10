@@ -22,7 +22,7 @@ private fun initBase64Online() {
     val fileInput: HTMLInputElement = document.getElementById("b6-input-file") as HTMLInputElement
     val fileOutput: HTMLPreElement = document.getElementById("b6-output-file") as HTMLPreElement
     val fileActionEncode: HTMLInputElement = document.getElementById("b6-file-action-encode") as HTMLInputElement
-    val fileActionDecode: HTMLInputElement = document.getElementById("b6-file-action-encode") as HTMLInputElement
+    val fileActionDecode: HTMLInputElement = document.getElementById("b6-file-action-decode") as HTMLInputElement
 
     txtPlainInput.oninput = {
         val text = txtPlainInput.value
