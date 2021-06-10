@@ -2,7 +2,7 @@
 
 The most useful base64 tools put together on one page.
 
-This page is ment to
+This page is ment to collect everything you need around base64 and provide an online tool so you can use it whereever and whenever you need it.
 
 ## Usage
 
