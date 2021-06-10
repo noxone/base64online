@@ -4,6 +4,7 @@ on:
   push:
     branches: [ master ]
 
+# based https://docs.github.com/en/actions/guides/building-and-testing-java-with-gradle
 jobs:
   publish:
     runs-on: ubuntu-latest
