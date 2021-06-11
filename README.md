@@ -12,7 +12,7 @@ Just go to [base64.olafneumann.org](https://base64.olafneumann.org) to use the p
 
 ### Docker
 
-Run the application local in a Docker container and then find it on port 80 of your local machine:
+Run the application local in a [Docker container](https://hub.docker.com/r/noxone/base64online) and then find it on port 80 of your local machine:
 
 ````bash
 docker run -d -p 80:80 noxone/base64online
